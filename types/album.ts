@@ -1,5 +1,5 @@
 export interface IAlbum {
-  userId: number
-  id: number
-  title: string
+  userId: number | null
+  id: number | null
+  title: string | null
 }

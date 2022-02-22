@@ -97,7 +97,7 @@ export const Album = ({
 export default Album
 
 export const getServerSideProps: GetServerSideProps<{
-  id: string | string[]
+  id: string | string[] | undefined
 }> = async (context) => {
-  return { props: { id: context.params.id } }
+  return { props: { id: context?.params?.id } }
 }
