@@ -7,8 +7,13 @@ import { ErrorMessage } from '../../components/error-message/error-message'
 import { AlbumCard } from '../../components/album-card/album-card'
 import { PhotoSkeleton } from '../../components/photo-skeleton/photo-skeleton'
 
+const pickRandomPhotoFromAlbum = (albumPhotos: IPhoto[]) => {
+  const randomNumber = Math.floor(Math.random() * albumPhotos.length) + 0
+  return albumPhotos[randomNumber]
+}
+
 export const Albums: NextPage = () => {
-  const [picturesGroupedByAlbum, setPicturesGroupedByAlbum] = useState<
+  const [photosGroupedByAlbum, setPhotosGroupedByAlbum] = useState<
     Record<number, IPhoto[]>
   >({})
   const [status, setStatus] = useState<IStatus>('loading')
@@ -18,7 +23,7 @@ export const Albums: NextPage = () => {
       .then((res) => res.json())
       .then((photos: IPhoto[]) => {
         setStatus('success')
-        setPicturesGroupedByAlbum(groupBy(photos, 'albumId'))
+        setPhotosGroupedByAlbum(groupBy(photos, 'albumId'))
       })
       .catch(() => {
         setStatus('error')
@@ -41,12 +46,12 @@ export const Albums: NextPage = () => {
 
       {status === 'success' && (
         <div className="space-y-2 lg:space-y-0 lg:gap-2 lg:grid lg:grid-cols-5">
-          {Object.values(picturesGroupedByAlbum).map((albums, index) => {
+          {Object.values(photosGroupedByAlbum).map((albumPhotos, index) => {
             return (
               <AlbumCard
                 key={index}
-                numberOfPhotosInAlbum={albums.length}
-                randomAlbumPhoto={albums[0]}
+                numberOfPhotosInAlbum={albumPhotos.length}
+                randomAlbumPhoto={pickRandomPhotoFromAlbum(albumPhotos)}
               />
             )
           })}
