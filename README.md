@@ -1,4 +1,4 @@
-# Photo Album Tech ShowCase
+# Photo Album
 
 ## How to use
 
@@ -37,3 +37,9 @@ npm run test
 ```bash
 npm run lint
 ```
+
+## Libraries
+
+[Next.js](https://nextjs.org/)  
+[React](https://reactjs.org/)  
+[React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
