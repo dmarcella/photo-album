@@ -14,14 +14,14 @@ describe('Layout Tests', () => {
     expect(childrenText).toBeInTheDocument()
   })
 
-  it('should render the title', () => {
+  it('should render the title', async () => {
     render(
       <Layout>
         <div>Hello World</div>
       </Layout>
     )
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(document.title).toEqual('Photo Album')
     })
   })

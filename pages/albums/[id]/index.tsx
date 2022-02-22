@@ -1,4 +1,5 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { ErrorMessage } from '../../../components/error-message/error-message'
 import { PhotoSkeleton } from '../../../components/photo-skeleton/photo-skeleton'
@@ -48,7 +49,7 @@ export const Album = ({
       .catch(() => {
         setStatus('error')
       })
-  }, [])
+  }, [id])
 
   return (
     <>
@@ -80,7 +81,13 @@ export const Album = ({
                   className="rounded overflow-hidden shadow-lg hover:opacity-75 hover:bg-slate-300"
                   key={photo.id}
                 >
-                  <img className="w-full" src={photo.url} alt={photo.title} />
+                  <Image
+                    className="w-full"
+                    src={photo.url}
+                    alt={photo.title}
+                    width={600}
+                    height={600}
+                  />
                   <div className="flex justify-between px-6 py-4">
                     <div className="font-bold text-xl">{photo.title}</div>
                   </div>
