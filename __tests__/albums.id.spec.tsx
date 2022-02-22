@@ -7,34 +7,6 @@ const mockFetchPromiseReject = Promise.reject({
   ok: false,
 })
 
-const mockJsonPromise = Promise.resolve([
-  {
-    albumId: 2,
-    id: 57,
-    title: 'vero est optio expedita quis ut molestiae',
-    url: 'https://via.placeholder.com/600/95acce',
-    thumbnailUrl: 'https://via.placeholder.com/150/95acce',
-  },
-  {
-    albumId: 2,
-    id: 58,
-    title: 'rem pariatur facere eaque',
-    url: 'https://via.placeholder.com/600/cde4c1',
-    thumbnailUrl: 'https://via.placeholder.com/150/cde4c1',
-  },
-  {
-    albumId: 2,
-    id: 59,
-    title: 'modi totam dolor eaque et ipsum est cupiditate',
-    url: 'https://via.placeholder.com/600/a46a91',
-    thumbnailUrl: 'https://via.placeholder.com/150/a46a91',
-  },
-])
-const mockFetchPromise = Promise.resolve({
-  json: () => mockJsonPromise,
-  ok: true,
-})
-
 const globalRef: any = global
 
 describe('Album ID Tests', () => {
