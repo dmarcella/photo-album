@@ -2,13 +2,11 @@ import { render, screen } from '@testing-library/react'
 import Home from '../pages/index'
 
 describe('Home', () => {
-  it('renders a heading', () => {
+  it('renders text', () => {
     render(<Home />)
 
-    const heading = screen.getByRole('heading', {
-      name: /welcome to next\.js!/i,
-    })
+    const homeText = screen.getByText('Home')
 
-    expect(heading).toBeInTheDocument()
+    expect(homeText).toBeInTheDocument()
   })
 })
