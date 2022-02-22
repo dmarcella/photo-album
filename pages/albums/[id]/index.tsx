@@ -60,7 +60,7 @@ export const Album = ({
             <div className="h-8 bg-gray-200 rounded animate-pulse"></div>
           </div>
           <div
-            data-testid="loader"
+            data-testid="skeleton-loader"
             className="space-y-2 lg:space-y-0 lg:gap-2 lg:grid lg:grid-cols-5"
           >
             {[...Array(10).keys()].map((_, index) => {

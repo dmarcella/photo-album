@@ -57,12 +57,13 @@ describe('Albums Tests', () => {
     expect(albumWithTwoPhotos).toBeInTheDocument()
   })
 
+  // not sure why this test is failng the skeleton-loader is in the dom and status is loading
   // it('should display loader skeletons when apis are fetching data', async () => {
   //   globalRef.fetch = jest.fn().mockImplementationOnce(() => mockFetchPromise)
 
   //   render(<Albums />)
 
-  //   const loaderSkeleton = screen.getByTestId('skeleton-loader')
+  //   const loaderSkeleton = await screen.findByTestId('skeleton-loader')
   //   expect(loaderSkeleton).toBeInTheDocument()
   // })
 })

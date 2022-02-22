@@ -7,6 +7,44 @@ const mockFetchPromiseReject = Promise.reject({
   ok: false,
 })
 
+const mockJsonPromiseAlbum = Promise.resolve({
+  userId: 1,
+  id: 2,
+  title: 'sunt qui excepturi placeat culpa',
+})
+const mockFetchPromiseAlbum = Promise.resolve({
+  json: () => mockJsonPromiseAlbum,
+  ok: true,
+})
+
+const mockJsonPromiseAlbumPhotos = Promise.resolve([
+  {
+    albumId: 2,
+    id: 57,
+    title: 'vero est optio expedita quis ut molestiae',
+    url: 'https://via.placeholder.com/600/95acce',
+    thumbnailUrl: 'https://via.placeholder.com/150/95acce',
+  },
+  {
+    albumId: 2,
+    id: 58,
+    title: 'rem pariatur facere eaque',
+    url: 'https://via.placeholder.com/600/cde4c1',
+    thumbnailUrl: 'https://via.placeholder.com/150/cde4c1',
+  },
+  {
+    albumId: 2,
+    id: 59,
+    title: 'modi totam dolor eaque et ipsum est cupiditate',
+    url: 'https://via.placeholder.com/600/a46a91',
+    thumbnailUrl: 'https://via.placeholder.com/150/a46a91',
+  },
+])
+const mockFetchPromiseAlbumPhotos = Promise.resolve({
+  json: () => mockJsonPromiseAlbumPhotos,
+  ok: true,
+})
+
 const globalRef: any = global
 
 describe('Album ID Tests', () => {
@@ -29,15 +67,7 @@ describe('Album ID Tests', () => {
       .mockImplementationOnce((url) => {
         switch (url) {
           case 'https://jsonplaceholder.typicode.com/albums/2':
-            return Promise.resolve({
-              json: () =>
-                Promise.resolve({
-                  userId: 1,
-                  id: 2,
-                  title: 'sunt qui excepturi placeat culpa',
-                }),
-              ok: true,
-            })
+            return mockFetchPromiseAlbum
           default:
             return Promise.reject(new Error('not found'))
         }
@@ -45,33 +75,7 @@ describe('Album ID Tests', () => {
       .mockImplementationOnce((url) => {
         switch (url) {
           case 'https://jsonplaceholder.typicode.com/photos?albumId=2':
-            return Promise.resolve({
-              json: () =>
-                Promise.resolve([
-                  {
-                    albumId: 2,
-                    id: 57,
-                    title: 'vero est optio expedita quis ut molestiae',
-                    url: 'https://via.placeholder.com/600/95acce',
-                    thumbnailUrl: 'https://via.placeholder.com/150/95acce',
-                  },
-                  {
-                    albumId: 2,
-                    id: 58,
-                    title: 'rem pariatur facere eaque',
-                    url: 'https://via.placeholder.com/600/cde4c1',
-                    thumbnailUrl: 'https://via.placeholder.com/150/cde4c1',
-                  },
-                  {
-                    albumId: 2,
-                    id: 59,
-                    title: 'modi totam dolor eaque et ipsum est cupiditate',
-                    url: 'https://via.placeholder.com/600/a46a91',
-                    thumbnailUrl: 'https://via.placeholder.com/150/a46a91',
-                  },
-                ]),
-              ok: true,
-            })
+            return mockFetchPromiseAlbumPhotos
           default:
             return Promise.reject(new Error('not found'))
         }
@@ -93,21 +97,14 @@ describe('Album ID Tests', () => {
     expect(thirdPhoto).toBeInTheDocument()
   })
 
+  // not sure why this test is failng the skeleton-loader is in the dom and status is loading
   // it('should display loader skeletons when apis are fetching data', async () => {
   //   globalRef.fetch = jest
   //     .fn()
   //     .mockImplementationOnce((url) => {
   //       switch (url) {
   //         case 'https://jsonplaceholder.typicode.com/albums/2':
-  //           return Promise.resolve({
-  //             json: () =>
-  //               Promise.resolve({
-  //                 userId: 1,
-  //                 id: 2,
-  //                 title: 'sunt qui excepturi placeat culpa',
-  //               }),
-  //             ok: true,
-  //           })
+  //           return mockFetchPromiseAlbum
   //         default:
   //           return Promise.reject(new Error('not found'))
   //       }
@@ -115,33 +112,7 @@ describe('Album ID Tests', () => {
   //     .mockImplementationOnce((url) => {
   //       switch (url) {
   //         case 'https://jsonplaceholder.typicode.com/photos?albumId=2':
-  //           return Promise.resolve({
-  //             json: () =>
-  //               Promise.resolve([
-  //                 {
-  //                   albumId: 2,
-  //                   id: 57,
-  //                   title: 'vero est optio expedita quis ut molestiae',
-  //                   url: 'https://via.placeholder.com/600/95acce',
-  //                   thumbnailUrl: 'https://via.placeholder.com/150/95acce',
-  //                 },
-  //                 {
-  //                   albumId: 2,
-  //                   id: 58,
-  //                   title: 'rem pariatur facere eaque',
-  //                   url: 'https://via.placeholder.com/600/cde4c1',
-  //                   thumbnailUrl: 'https://via.placeholder.com/150/cde4c1',
-  //                 },
-  //                 {
-  //                   albumId: 2,
-  //                   id: 59,
-  //                   title: 'modi totam dolor eaque et ipsum est cupiditate',
-  //                   url: 'https://via.placeholder.com/600/a46a91',
-  //                   thumbnailUrl: 'https://via.placeholder.com/150/a46a91',
-  //                 },
-  //               ]),
-  //             ok: true,
-  //           })
+  //           return mockFetchPromiseAlbumPhotos
   //         default:
   //           return Promise.reject(new Error('not found'))
   //       }
@@ -149,7 +120,7 @@ describe('Album ID Tests', () => {
 
   //   render(<Album id={'2'} />)
 
-  //   const loaderSkeleton = screen.getByTestId('skeleton-loader')
+  //   const loaderSkeleton = await screen.findByTestId('skeleton-loader')
   //   expect(loaderSkeleton).toBeInTheDocument()
   // })
 })
